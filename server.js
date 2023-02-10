@@ -3,7 +3,8 @@ const path = require('path');
 const termData = require('./db/db.json');
 const PORT = 3001;
 const fs = require('fs');
-const { json } = require('express');
+const { v4: uuidv4 } = require('uuid');
+uuidv4();
 
 const app = express();
 
@@ -30,8 +31,10 @@ app.post('/api/notes', (req, res) => {
       let tempData = JSON.parse(data);
       let newNote = { 
         title: req.body.title,
-        text: req.body.text
+        text: req.body.text,
+        id: uuidv4()
       }
+    
       tempData.push(newNote);
 
     fs.writeFile('db/db.json', JSON.stringify(tempData), err=> {
@@ -41,18 +44,15 @@ app.post('/api/notes', (req, res) => {
   })
 });
 
-app.delete('/api/notes', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
   fs.readFile('db/db.json', (err, data) => {
     if (err) throw err;
     
       let tempData = JSON.parse(data);
-      let newNote = { 
-        title: req.body.title,
-        text: req.body.text
-      }
-      tempData.push(newNote);
+      let filteredData = tempData.filter(item => item.id !== req.params.id)
 
-    fs.writeFile('db/db.json', JSON.stringify(tempData), err=> {
+
+    fs.writeFile('db/db.json', JSON.stringify(filteredData), err=> {
       if (err) throw err;
       res.redirect('/notes')
     })
