@@ -20,8 +20,7 @@
 
   ## Installation
 
-  Go the website about? N/A
-
+  Go the website about: https://note-taker-banana.herokuapp.com/
   ---
 
   ## Usage
