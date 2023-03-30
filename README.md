@@ -20,7 +20,7 @@
 
   ## Installation
 
-  Go the website about: https://note-taker-banana.herokuapp.com/
+  Go the website to see what its all about: [link here](https://note-taker-banana.herokuapp.com/)
   ---
 
   ## Usage
